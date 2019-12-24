@@ -10,7 +10,6 @@ import javax.persistence.PersistenceUnit;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.tyss.ehub.dto.Billable;
 import com.tyss.ehub.dto.ClientsInfo;
 
 @Repository
@@ -58,9 +57,20 @@ public class ClientdaoImpl implements Clientdao {
 			return false;
 		}
 		transaction.begin();
-		clients1.setClientId(clients1.getClientId());
-		clients1.setClientname(clients1.getClientname());
-		clients1.setClientLogo(clients1.getClientLogo());
+		clients1.setClientId(clientinfo.getClientId());
+		clients1.setClienShortName(clientinfo.getClienShortName());
+		clients1.setAddressLine2(clientinfo.getAddressLine2());
+		clients1.setClientEmail(clientinfo.getClientEmail());
+		clients1.setClientName(clientinfo.getClientName());
+		clients1.setClientNo(clientinfo.getClientNo());
+		clients1.setClientLogo(clientinfo.getClientLogo());
+		clients1.setState(clientinfo.getState());
+		clients1.setCity(clientinfo.getCity());
+		clients1.setDeptName(clientinfo.getDeptName());
+		clients1.setCompWebSite(clientinfo.getCompWebSite());
+		clients1.setCountry(clientinfo.getCountry());
+		clients1.setStreetAddress(clientinfo.getStreetAddress());
+		clients1.setZipCode(clientinfo.getZipCode());
 		transaction.commit();
 		return true;
 	}

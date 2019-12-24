@@ -8,7 +8,7 @@ public class ORMConfig {
 	@Bean
 	public LocalEntityManagerFactoryBean ormConfig() {
 		LocalEntityManagerFactoryBean bean = new LocalEntityManagerFactoryBean();
-		bean.setPersistenceUnitName("ehub");
+		bean.setPersistenceUnitName("DEVKART");
 		return bean;
 	}
 }

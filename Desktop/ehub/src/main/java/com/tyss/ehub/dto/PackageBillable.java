@@ -8,26 +8,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 @Table
-public class Billable {
+public class PackageBillable {
+
 	@Id
 	@GeneratedValue
-	private int employeeId;
 	@Column
-	private String empName;
+	private int eId;
 	@Column
-	private Date deployementDate;
+	private double paymentByTy;
 	@Column
-	private Date contractEndDate;
+	private double paymentByClient;
 	@Column
-	private double rateCardPerMonth;
+	private Date dopByTy;
 	@Column
-	private String stack;
-	@Column
-	private String yoe;
-	
+	private Date dopByClient;
 }

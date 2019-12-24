@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.tyss.ehub.dto.ClientsInfoStatusCode;
 import com.tyss.ehub.service.ClientService;
 
 @RestController
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*",origins = "*")
 @RequestMapping("/clientinfo")
 public class ClientController {
 
@@ -72,7 +74,7 @@ public class ClientController {
 	}
 
 	@PutMapping(path = "/clientinfo", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ClientsInfoStatusCode updateBook(@RequestBody ClientsInfo cinfo) {
+	public ClientsInfoStatusCode updateclient(@RequestBody ClientsInfo cinfo) {
 		ClientsInfoStatusCode response = new ClientsInfoStatusCode();
 		if (service.update(cinfo)) {
 			response.setStatusCode(201);

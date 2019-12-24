@@ -6,25 +6,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.tyss.ehub.dto.Billable;
+import com.tyss.ehub.dto.PackageBillable;
 
 @Repository
-public class BillableImpl implements Billabledao {
+public class PackageDaoImpl implements PackageDao {
 
 	@PersistenceUnit
 	private EntityManagerFactory emf;
 
 	@Override
-	public boolean insert(Billable bill) {
+	public boolean addPackage(PackageBillable pakg) {
 		EntityManager manager = emf.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		try {
 			transaction.begin();
-			manager.persist(bill);
+			manager.persist(pakg);
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
@@ -35,48 +35,48 @@ public class BillableImpl implements Billabledao {
 	}
 
 	@Override
-	public boolean update(Billable empBill) {
+	public boolean removePackage(int pakgId) {
 		EntityManager manager = emf.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
-		Billable empBill1 = manager.find(Billable.class, empBill.getEmployeeId());
-		if (empBill1 == null) {
+		PackageBillable pakg = manager.find(PackageBillable.class, pakgId);
+		if (pakg == null) {
 			return false;
 		}
 		transaction.begin();
-		empBill1.setEmployeeId(empBill.getEmployeeId());
-		empBill1.setContractEndDate(empBill.getContractEndDate());
-		empBill1.setDeployementDate(empBill.getDeployementDate());
-		empBill1.setRateCardPerMonth(empBill.getRateCardPerMonth());
-		empBill1.setStack(empBill.getStack());
-		empBill1.setYoe(empBill.getYoe());
+		manager.remove(pakg);
 		transaction.commit();
 		return true;
 	}
 
 	@Override
-	public List<Billable> getAllBillable() {
+	public List<PackageBillable> getAllPackage() {
 		EntityManager manager = emf.createEntityManager();
-		String get = "from Billable";
+		String get = "from PackageBillable";
 		Query query = (Query) manager.createQuery(get);
-		List<Billable> list = query.getResultList();
+		List<PackageBillable> list = query.getResultList();
 		if (list == null) {
 			return null;
 		}
 		return list;
 	}
 
+
+
 	@Override
-	public boolean delete(int bId) {
+	public boolean updatePackage(PackageBillable pakg) {
 		EntityManager manager = emf.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
-		Billable bill1 = manager.find(Billable.class, bId);
-		if (bill1 == null) {
-			return false;
+		PackageBillable pakBillable = manager.find(PackageBillable.class, pakg.getEId());
+		if(pakBillable!=null) {
+			transaction.begin();
+			pakBillable.setEId(pakg.getEId());
+			pakBillable.setDopByClient(pakg.getDopByClient());
+			pakBillable.setDopByTy(pakg.getDopByTy());
+			pakBillable.setPaymentByClient(pakg.getPaymentByClient());
+			pakBillable.setPaymentByTy(pakg.getPaymentByTy());
+			transaction.commit();
+			return true;
 		}
-		transaction.begin();
-		manager.remove(bill1);
-		transaction.commit();
-		return true;
+		return false;
 	}
-
 }
