@@ -1,9 +1,11 @@
 package com.tyss.ehub.dao;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -84,18 +86,19 @@ public class BillableImpl implements Billabledao {
 		return true;
 	}
 	
-	public List<Billable> getBillable() {	
+	public HashSet<String> getBillable() {	
 		
 		EntityManager manager = emf.createEntityManager();
 
-		String get = "from Billable";
+		String get = "select stack from Billable";
 		Query query = (Query) manager.createQuery(get);
-		List<Billable> list = query.getResultList();
-		
-		if (list == null) {
+		List<String> list = query.getResultList();
+		HashSet<String> hs = new HashSet<String>(list);
+		System.out.println(hs);
+		if (hs == null) {
 			return null;
 		}
-		return list;
+		return hs;
 		/*
 		 * EntityManager manager = emf.createEntityManager(); EntityTransaction
 		 * transaction = manager.getTransaction(); //String

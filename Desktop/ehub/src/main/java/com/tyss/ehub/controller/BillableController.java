@@ -3,8 +3,10 @@ package com.tyss.ehub.controller;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -64,7 +66,7 @@ public class BillableController {
 			response.setStatusCode(201);
 			response.setMessage("success");
 			response.setDescription("data  successfully updated..");
-			response.setListBill(Arrays.asList(bill));
+			response.setBillList(Arrays.asList(bill));
 		} else {
 			response.setStatusCode(400);
 			response.setMessage("failure");
@@ -73,10 +75,11 @@ public class BillableController {
 		return response;
 	}
 
-	@DeleteMapping(path = "/billable/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public BillableResponse deleteBillable(@PathVariable int bId) {
+	@DeleteMapping(path = "/billable/{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public BillableResponse deleteBillable(@PathVariable int employeeId) {
+		System.out.println("bhrathi::"+employeeId);
 		BillableResponse response = new BillableResponse();
-		if (service.delete(bId)) {
+		if (service.delete(employeeId)) {
 			response.setStatusCode(201);
 			response.setMessage("success");
 			response.setDescription("data successfully deleted..");
@@ -100,7 +103,7 @@ public class BillableController {
 			response.setStatusCode(201);
 			response.setMessage("success");
 			response.setDescription("data  successfully retrived");
-			response.setListBill(list);
+			response.setBillList(list);
 		}
 		return response;
 	}
@@ -108,7 +111,7 @@ public class BillableController {
 	@GetMapping(path ="/getbill", produces = MediaType.APPLICATION_JSON_VALUE)
 	public BillableResponse getAllBill() {
 		BillableResponse response = new BillableResponse();
-		List<Billable> list = service.getBillable();
+		HashSet<String> list = service.getBillable();
 		if (list == null) {
 			response.setStatusCode(400);
 			response.setMessage("failure");

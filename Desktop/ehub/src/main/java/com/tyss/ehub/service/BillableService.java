@@ -1,7 +1,9 @@
 package com.tyss.ehub.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.tyss.ehub.dto.Billable;
 
@@ -15,7 +17,7 @@ public interface BillableService {
 
 	public List<Billable> getAllBillable();
 	
-	public List<Billable> getBillable();
+	public HashSet<String> getBillable();
 
 	public Map<String, Integer> getStackCount();
 }
