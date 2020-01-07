@@ -1,8 +1,10 @@
 package com.tyss.ehub.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tyss.ehub.dto.ClientsInfo;
+import com.tyss.ehub.dto.ClientsInfoStatusCode;
 
 public interface Clientdao {
 
@@ -13,5 +15,13 @@ public interface Clientdao {
 	public boolean update(ClientsInfo clientinfo);
 
 	public List<ClientsInfo> getAllClients();
+
+	public ClientsInfo getAllComp();
+	
+	public Map<Integer, Integer> getCountBillable();
+	
+	public ClientsInfoStatusCode getClientDeatils(int id);
+
+	public Map<String, Integer> getStackCount(int clientId);
 
 }

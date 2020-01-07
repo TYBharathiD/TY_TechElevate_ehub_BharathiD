@@ -1,9 +1,13 @@
 package com.tyss.ehub.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -28,7 +32,8 @@ public class ClientsInfo {
 	private String clientEmail;
 	@Column
 	private String compWebSite;
-	@Column
+	@Lob
+//	@Column(columnDefinition = "LONGBLOB")
 	private String clientLogo; // image storing
 	@Column
 	private String streetAddress;
@@ -42,5 +47,5 @@ public class ClientsInfo {
 	private int zipCode;
 	@Column
 	private String country;
-
+	
 }

@@ -1,6 +1,7 @@
 package com.tyss.ehub.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,17 @@ public class BillableServiceImpl implements BillableService {
 	@Override
 	public boolean update(Billable bill) {
 		return dao.update(bill);
+	}
+
+	@Override
+	public List<Billable> getBillable() {
+		return dao.getBillable();
+	}
+
+	@Override
+	public Map<String, Integer> getStackCount() {
+		
+		return dao.getCountStack();
 	}
 
 }

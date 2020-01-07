@@ -28,6 +28,8 @@ public class Billable {
 	@Column
 	private String stack;
 	@Column
-	private String yoe;
+	private int yoe;
+	@Column
+	private int compId;
 	
 }

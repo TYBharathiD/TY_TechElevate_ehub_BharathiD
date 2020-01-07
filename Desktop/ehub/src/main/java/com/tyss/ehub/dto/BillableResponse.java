@@ -1,6 +1,7 @@
 package com.tyss.ehub.dto;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
@@ -11,4 +12,5 @@ public class BillableResponse {
 	private String description;
 	private Billable empBill;
 	private List<Billable> listBill;
+	Map<String, Integer> countMap;
 }
